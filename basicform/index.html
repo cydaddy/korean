@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기본형 찾기 대모험</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Menu -->
+        <section id="main-menu" class="screen active">
+            <div class="title-area">
+                <h1>기본형 찾기 대모험</h1>
+                <p>형태가 바뀌지 않는 부분을 찾아 떠나요!</p>
+            </div>
+            <div class="menu-buttons">
+                <button class="btn-primary" onclick="startGame('practice')">연습 모드</button>
+                <button class="btn-secondary" onclick="startGame('challenge')">실전 모드</button>
+            </div>
+            <div class="decoration-tree"></div>
+            <div class="decoration-bird"></div>
+        </section>
+
+        <!-- Practice Mode -->
+        <section id="practice-mode" class="screen hidden">
+            <div class="header">
+                <button class="btn-home" onclick="goHome()">🏠 홈으로</button>
+                <div class="progress">문제 <span id="p-current">1</span> / <span id="p-total">10</span></div>
+            </div>
+            <div class="content-area">
+                <div class="instruction">
+                    <p>문장에서 <strong>형태가 바뀌지 않는 부분</strong>을 찾아보세요!</p>
+                </div>
+                <div class="card-container" id="practice-card">
+                    <!-- Dynamic Content -->
+                </div>
+                <div class="input-area">
+                    <div class="input-group">
+                        <label>바뀌지 않는 부분:</label>
+                        <input type="text" id="p-stem-input" placeholder="예: 먹" autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label>기본형:</label>
+                        <input type="text" id="p-basic-input" placeholder="예: 먹다" autocomplete="off">
+                    </div>
+                    <button class="btn-check" onclick="checkPracticeAnswer()">확인하기</button>
+                </div>
+                <div id="p-feedback" class="feedback hidden"></div>
+            </div>
+        </section>
+
+        <!-- Challenge Mode -->
+        <section id="challenge-mode" class="screen hidden">
+            <div class="header">
+                <button class="btn-home" onclick="goHome()">🏠 홈으로</button>
+                <div class="score-board">점수: <span id="c-score">0</span></div>
+            </div>
+            <div class="content-area">
+                <div class="instruction">
+                    <p>문장을 보고 <strong>기본형</strong>을 바로 맞춰보세요!</p>
+                </div>
+                <div class="card-container" id="challenge-card">
+                    <!-- Dynamic Content -->
+                </div>
+                <div class="input-area">
+                    <div class="input-group center">
+                        <input type="text" id="c-basic-input" placeholder="기본형 입력" autocomplete="off">
+                        <button class="btn-check" onclick="checkChallengeAnswer()">정답 확인</button>
+                    </div>
+                </div>
+                <div id="c-feedback" class="feedback hidden"></div>
+            </div>
+        </section>
+        
+        <!-- Completion Screen -->
+        <section id="completion-screen" class="screen hidden">
+             <div class="result-content">
+                <h2 id="result-title">참 잘했어요!</h2>
+                <p id="result-message">모든 문제를 해결했습니다.</p>
+                <button class="btn-primary" onclick="goHome()">다시 하기</button>
+             </div>
+        </section>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
