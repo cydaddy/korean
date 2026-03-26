@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>문장 나누기 대결!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="start-screen" class="screen active">
+        <div class="glass-panel">
+            <h1>🔪 문장 나누기 달인 ⚔️</h1>
+            <p>누가/무엇이(주어부) + 어찌하다/어떠하다/무엇이다(서술부) 구조를 잘라보자!</p>
+
+            <div class="options-container">
+                <div class="option-group">
+                    <h2>🎯 문제 세트 선택</h2>
+                    <div class="btn-group" id="level-btns">
+                        <button class="level-btn active" data-level="1">1단계<br><small>(3단어 혼합)</small></button>
+                        <button class="level-btn" data-level="2">2단계<br><small>(긴 서술부)</small></button>
+                        <button class="level-btn" data-level="3">3단계<br><small>(긴 주어부)</small></button>
+                        <button class="level-btn" data-level="4">4단계<br><small>(종합문제)</small></button>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <h2>👥 시작할 모둠(인원)을 고르세요</h2>
+                    <div class="btn-group" id="player-btns">
+                        <button class="player-btn" data-players="1">1명</button>
+                        <button class="player-btn" data-players="2">2명</button>
+                        <button class="player-btn" data-players="3">3명</button>
+                        <button class="player-btn" data-players="4">4명</button>
+                        <button class="player-btn" data-players="5">5명</button>
+                        <button class="player-btn" data-players="6">6명</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <div class="header">
+            <button id="btn-home" class="btn-small">🏠 처음으로</button>
+            <div id="level-display" class="level-badge">1단계</div>
+        </div>
+        <div id="players-container" class="players-container"></div>
+    </div>
+
+    <div id="result-screen" class="screen">
+        <div class="glass-panel result-panel">
+            <h1>게임 끝! 🎉</h1>
+            <h2 id="winner-text" style="font-size: 3rem; color: var(--primary);">우승: 1P</h2>
+            <div id="rankings" class="rankings"></div>
+            <button id="btn-restart" class="btn-large">처음으로 돌아가기</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
