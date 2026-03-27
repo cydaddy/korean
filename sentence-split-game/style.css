@@ -13,6 +13,8 @@
 * {
   box-sizing: border-box;
   font-family: 'Jua', sans-serif;
+  /* 핀치 줌/더블탭 줌 방지 (브라우저 레벨) — JS 터치 이벤트 간섭 없음 */
+  touch-action: manipulation;
 }
 
 body, html {
@@ -26,6 +28,7 @@ body, html {
   align-items: center;
   overflow: hidden;
   user-select: none;
+  touch-action: manipulation;
 }
 
 .screen {
@@ -95,16 +98,20 @@ button:active {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.level-btn, .player-btn {
+.level-btn, .player-btn, .same-set-btn {
   background: var(--surface);
   color: var(--text-dark);
   padding: 1rem 1.5rem;
   border: 2px solid transparent;
 }
-.level-btn.active, .player-btn:hover {
+.level-btn.active, .player-btn:hover, .same-set-btn.active {
   background: var(--primary);
   color: white;
   transform: scale(1.05);
+}
+.same-set-btn {
+  font-size: 1.5rem;
+  min-width: 200px;
 }
 
 .header {
