@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글쓰기 전 생각 요정의 대모험 - 초등학교 3학년 국어</title>
+    <!-- Google Fonts: Jua & Gaegu -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@400;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 메인 메뉴 화면 -->
+        <section id="main-menu" class="screen active">
+            <div class="cloud-bg"></div>
+            <div class="title-area">
+                <div class="badge">🎒 초등학교 3학년 국어</div>
+                <h1>글쓰기 전<br><span class="highlight">생각 요정</span>의 대모험</h1>
+                <p class="subtitle">글을 쓰기 전에 무엇을 생각해야 할까요? 요정과 함께 배워봐요!</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>💡 꼭 기억해야 할 4가지 약속!</h3>
+                <ul class="concept-list">
+                    <li><span class="num orange">1</span> 👥 <strong>읽는 사람은 누구일까?</strong> (독자)</li>
+                    <li><span class="num yellow">2</span> 📏 <strong>얼마만큼 쓸까?</strong> (분량)</li>
+                    <li><span class="num green">3</span> ✏️ <strong>무엇에 대해 쓸까?</strong> (주제)</li>
+                    <li><span class="num blue">4</span> 🎯 <strong>글쓰기의 목표는 무엇인가?</strong> (목적)</li>
+                </ul>
+            </div>
+
+            <div class="menu-buttons">
+                <button class="btn btn-start" onclick="startGame()">🧙‍♂️ 모험 시작하기!</button>
+            </div>
+            <div class="footer-decoration">
+                <span>🌳</span><span>🌸</span><span>🏠</span><span>🌸</span><span>🌳</span>
+            </div>
+        </section>
+
+        <!-- 퀴즈 플레이 화면 -->
+        <section id="quiz-screen" class="screen hidden">
+            <div class="quiz-header">
+                <button class="btn btn-home" onclick="goHome()">🏠 홈으로</button>
+                <div class="status-bar">
+                    <div class="progress-container">
+                        <span class="progress-text">문제 <span id="current-q-num">1</span> / 10</span>
+                        <div class="progress-track">
+                            <div id="progress-bar" class="progress-fill" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                    <div class="hearts-container" id="hearts-display">
+                        ❤️❤️❤️❤️❤️
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-body">
+                <!-- 질문 지시문 -->
+                <div class="question-instruction">
+                    <div class="fairy-avatar">🧚‍♀️</div>
+                    <div class="speech-bubble">
+                        <p>아래 글은 4가지 약속 중 <strong>어떤 것을 잘 지키지 못했을까요?</strong></p>
+                    </div>
+                </div>
+
+                <!-- 글쓰기 상황 및 본문 카드 -->
+                <div class="writing-card-container">
+                    <div class="writing-context-tag" id="writing-situation">📍 글쓰기 상황: ...</div>
+                    <div class="writing-paper">
+                        <div class="paper-lines">
+                            <div class="paper-content" id="writing-text">
+                                여기에 편지나 글 내용이 들어갑니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4지 선다 보기 카드 -->
+                <div class="choices-grid" id="choices-container">
+                    <!-- JavaScript에서 동적으로 생성 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 정답 확인 팝업 (Dialog) -->
+        <dialog id="feedback-dialog">
+            <div class="dialog-content">
+                <div class="dialog-icon" id="feedback-icon">🎉</div>
+                <h2 id="feedback-title">정답이에요!</h2>
+                <div class="feedback-detail">
+                    <div class="correct-answer-is">
+                        정답: <span id="correct-answer-name" class="highlight-answer">읽는 사람은 누구일까?</span>
+                    </div>
+                    <p id="feedback-explanation">해설이 여기에 친절하게 들어갑니다.</p>
+                </div>
+                <button class="btn btn-next" id="btn-next-action" onclick="closeFeedbackAndNext()">다음 문제로 ➔</button>
+            </div>
+        </dialog>
+
+        <!-- 결과 화면 -->
+        <section id="result-screen" class="screen hidden">
+            <div class="confetti-bg"></div>
+            <div class="result-header">
+                <h2>🏆 모험 완료!</h2>
+                <p class="result-subtitle">글쓰기 생각 요정이 준 성적표를 확인해 보세요.</p>
+            </div>
+
+            <div class="result-card">
+                <div class="badge-gold">🎖️ 글쓰기 생각 대장 임명장</div>
+                <h1 class="student-name">참 잘했어요!</h1>
+                <div class="score-display">
+                    맞힌 문제: <span id="result-correct-count" class="highlight">10</span> / 10<br>
+                    남은 하트: <span id="result-hearts" class="highlight">❤️❤️❤️❤️❤️</span>
+                </div>
+                
+                <hr class="divider">
+
+                <div class="analysis-section">
+                    <h3>📊 요정의 생각 분석 리포트</h3>
+                    <div class="strengths-weaknesses" id="analysis-report">
+                        <!-- 동적으로 요정 분석 내용 렌더링 -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-buttons">
+                <button class="btn btn-replay" onclick="startGame()">🔄 다시 도전하기</button>
+                <button class="btn btn-secondary-outline" onclick="goHome()">🏠 메인 화면으로</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript 로드 -->
+    <script src="script.js"></script>
+</body>
+</html>
