@@ -468,6 +468,11 @@ body {
     gap: 10px;
 }
 
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
 .detective-avatar {
     font-size: 2.2rem;
     background-color: #EBF8FF;
@@ -480,6 +485,7 @@ body {
     justify-content: center;
     box-shadow: 0 4px 0 var(--color-dark);
     flex-shrink: 0;
+    animation: float 2.5s ease-in-out infinite;
 }
 
 .speech-bubble {
@@ -570,9 +576,9 @@ body {
 
 .paper-content {
     font-family: var(--font-hand);
-    font-size: 1.45rem;
+    font-size: 1.65rem;
     font-weight: bold;
-    line-height: 1.5;
+    line-height: 1.6;
     color: #4A3E3D;
     word-break: keep-all;
 }
@@ -615,6 +621,7 @@ body {
 }
 
 .btn-choice {
+    font-family: var(--font-main);
     width: 100%;
     flex: 1; /* 높이를 동일하게 가득 채움 */
     border: var(--border-main);
@@ -625,7 +632,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 16px;
+    padding: 0 24px;
     text-align: left;
     user-select: none;
 }
@@ -643,19 +650,34 @@ body {
 .choice-btn-inner {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 20px;
+    justify-content: center;
     width: 100%;
 }
 
 .choice-icon {
-    font-size: 2.2rem;
+    font-size: 3.5rem;
+    filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.15));
 }
 
 .choice-text-group {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2px;
+    gap: 4px;
+}
+
+.choice-label {
+    font-family: var(--font-main);
+    font-size: 2.4rem;
+    line-height: 1.1;
+    text-shadow: 2px 2px 0 var(--color-white);
+}
+
+.choice-desc {
+    font-family: var(--font-hand);
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
 .btn-fact {
@@ -664,14 +686,9 @@ body {
 }
 .btn-fact .choice-label {
     color: var(--color-fact-main);
-    font-size: 1.6rem;
-    text-shadow: 1.5px 1.5px 0 var(--color-white);
 }
 .btn-fact .choice-desc {
-    color: #556B82;
-    font-size: 0.8rem;
-    font-family: var(--font-hand);
-    font-weight: 700;
+    color: #4B5563;
 }
 
 .btn-opinion {
@@ -680,14 +697,9 @@ body {
 }
 .btn-opinion .choice-label {
     color: var(--color-op-main);
-    font-size: 1.6rem;
-    text-shadow: 1.5px 1.5px 0 var(--color-white);
 }
 .btn-opinion .choice-desc {
-    color: #826B55;
-    font-size: 0.8rem;
-    font-family: var(--font-hand);
-    font-weight: 700;
+    color: #4B5563;
 }
 
 /* ==========================================
