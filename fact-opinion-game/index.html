@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사실 vs 의견 명탐정 훈련소 - 초등학교 3학년 국어</title>
+    <!-- Google Fonts: Jua & Gaegu & Nanum Pen Script -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Gaegu:wght@400;700&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 메인 메뉴 화면 -->
+        <section id="main-menu" class="screen active">
+            <div class="cloud-bg"></div>
+            <div class="title-area">
+                <div class="badge">🎒 초등학교 3학년 국어</div>
+                <h1>사실 vs 의견<br><span class="highlight">명탐정</span> 훈련소</h1>
+                <p class="subtitle">진짜 일어난 '사실'과 내 생각인 '의견'을 구별하는 멋진 명탐정이 되어 보세요!</p>
+            </div>
+
+            <!-- 개념 설명 카드 -->
+            <div class="concept-card">
+                <h3>💡 명탐정의 단서 구별법</h3>
+                <ul class="concept-list">
+                    <li><span class="num blue">사실</span> 🔍 진짜 일어난 일이나 눈으로 확인할 수 있는 일이에요! (참과 거짓을 나눌 수 있어요)</li>
+                    <li><span class="num orange">의견</span> 💭 어떤 일에 대한 사람의 생각이나 느낌이에요! (~해야 한다, ~같다 등)</li>
+                </ul>
+            </div>
+
+            <!-- 뱃지 진열대 -->
+            <div class="badge-shelf-container">
+                <h3>🏅 나의 명탐정 뱃지 진열대</h3>
+                <div class="badge-shelf" id="badge-shelf-display">
+                    <!-- JavaScript에서 뱃지 정보 로드 -->
+                </div>
+            </div>
+
+            <div class="menu-buttons">
+                <button class="btn btn-start" onclick="startGame()">🧐 훈련 시작하기!</button>
+            </div>
+            
+            <div class="footer-decoration">
+                <span>🔍</span><span>📜</span><span>🧐</span><span>📜</span><span>🔍</span>
+            </div>
+        </section>
+
+        <!-- 퀴즈 플레이 화면 -->
+        <section id="quiz-screen" class="screen hidden">
+            <div class="quiz-header">
+                <button class="btn btn-home" onclick="goHome()">🏠 홈으로</button>
+                <div class="status-bar">
+                    <div class="progress-container">
+                        <span class="progress-text">단서 <span id="current-q-num">1</span> / 10</span>
+                        <div class="progress-track">
+                            <div id="progress-bar" class="progress-fill" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                    <div class="hearts-container" id="hearts-display">
+                        ❤️❤️❤️❤️❤️
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-body">
+                <!-- 콤보 및 연속 정답 이펙트 표시 -->
+                <div class="combo-badge-wrapper" id="combo-display-area">
+                    <!-- 예: "🔥 3콤보!" 가 애니메이션과 함께 표시됨 -->
+                </div>
+
+                <!-- 질문 제시 카드 -->
+                <div class="question-instruction">
+                    <div class="detective-avatar">🧐</div>
+                    <div class="speech-bubble">
+                        <p>아래 단서는 <strong>'사실'</strong>일까요, <strong>'의견'</strong>일까요?</p>
+                    </div>
+                </div>
+
+                <!-- 단서 카드 (종이 스크롤 느낌) -->
+                <div class="clue-card-container">
+                    <div class="clue-tag">📍 오늘의 단서 문장</div>
+                    <div class="clue-paper">
+                        <div class="paper-lines">
+                            <div class="paper-content" id="clue-text">
+                                문장이 이곳에 들어갑니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 양자택일 버튼 (사실 vs 의견) -->
+                <div class="choices-container">
+                    <button class="btn-choice btn-fact" onclick="submitAnswer('fact')">
+                        <span class="choice-icon">🔍</span>
+                        <span class="choice-label">사실</span>
+                        <span class="choice-desc">눈으로 확인되는 진짜 일</span>
+                    </button>
+                    <button class="btn-choice btn-opinion" onclick="submitAnswer('opinion')">
+                        <span class="choice-icon">💭</span>
+                        <span class="choice-label">의견</span>
+                        <span class="choice-desc">마음속 생각이나 주장</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 결과 화면 -->
+        <section id="result-screen" class="screen hidden">
+            <div class="result-header">
+                <h2>🏆 훈련 결과 보고서</h2>
+            </div>
+            
+            <div class="result-body">
+                <div class="result-score-card">
+                    <div class="result-medal" id="result-medal-icon">🎖️</div>
+                    <h3 id="result-title">훌륭한 탐정이군요!</h3>
+                    <div class="score-details">
+                        <p>맞힌 문제: <span class="highlight-score" id="result-score">0</span> / 10</p>
+                        <p>최대 콤보: <span class="highlight-combo" id="result-combo">0</span> 콤보</p>
+                    </div>
+                </div>
+
+                <!-- 획득한 뱃지 리스트 -->
+                <div class="unlocked-badges-container" id="round-badges-container">
+                    <h4>✨ 이번 훈련으로 획득한 뱃지!</h4>
+                    <div class="round-badges-list" id="round-badges-list">
+                        <!-- 동적 생성 -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-buttons">
+                <button class="btn btn-replay" onclick="startGame()">🔄 다시 도전하기</button>
+                <button class="btn btn-secondary-outline" onclick="showMainMenu()">🏠 처음 화면으로</button>
+            </div>
+        </section>
+
+        <!-- 정답/오답 확인 다이얼로그 -->
+        <dialog id="feedback-dialog">
+            <div class="dialog-content">
+                <div class="dialog-icon" id="feedback-icon">🎉</div>
+                <h2 id="feedback-title">정답이에요!</h2>
+                <div class="feedback-detail">
+                    <div class="correct-answer-is">
+                        제시문 성격: <span id="correct-answer-name" class="highlight-answer">사실</span>
+                    </div>
+                    <p id="feedback-explanation">해설이 들어갑니다.</p>
+                </div>
+                <button class="btn btn-next" id="btn-next-action" onclick="closeFeedbackAndNext()">다음 단서로 ➔</button>
+            </div>
+        </dialog>
+    </div>
+
+    <!-- 배경 파티클용 컨테이너 (정답 시 폭죽 효과) -->
+    <div id="particle-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
